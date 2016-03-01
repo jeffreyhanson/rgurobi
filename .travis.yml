@@ -1,0 +1,25 @@
+language: r
+sudo: required
+warnings_are_errors: true
+
+os:
+  - linux
+  - osx
+
+env:
+  global:
+    - NOT_CRAN=true
+    - _R_CHECK_FORCE_SUGGESTS_=FALSE
+
+before_install: 
+  - echo "TRAVIS_OS_NAME = $TRAVIS_OS_NAME"
+  - echo "options(repos = c(CRAN='http://cran.rstudio.com'), rgl.useNULL=TRUE)" > ~/.Rprofile
+ 
+r_packages:
+  - covr
+  - rmarkdown
+  - testthat
+  
+after_success:
+  - Rscript -e 'covr::codecov()'
+ 

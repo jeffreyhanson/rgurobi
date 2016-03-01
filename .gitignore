@@ -1,0 +1,15 @@
+# C++ compiled files
+*.o
+*.so
+*.dll
+
+# R profile files
+*.Rproj.user
+*.Rhistory
+
+# log files
+gurobi.log
+
+# vignette cache
+/vignettes/rgurobi_files
+/vignettes/rgurobi_cache

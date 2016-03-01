@@ -1,0 +1,8 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.travis\.yml$
+NEWS.md
+gurobi.log
+cran-comments.md
+^revdep$
+^appveyor\.yml$

@@ -1,0 +1,34 @@
+Package: rgurobi
+Type: Package
+Title: Solve optimisation problems using Gurobi
+Version: 0.0.1
+Date: 2016-02-27
+Authors@R: person(c("Jeffrey", "O"), "Hanson", email='jeffrey.hanson@uqconnect.edu.au', role = c("aut", "cre"))
+Description: Solve optimisation problems using the commerical 'Gurobi' software package (obtained from <http://www.gurobi.com/>). This package provides similar functionality to the official gurobi R package (see <http://www.gurobi.com/products/modeling-languages/r>). However, this package allows users to retrive multiple solutions after solving a problem. Note that this package does not support quadratic expressions.
+Imports:
+    utils
+Depends:
+    R(>= 3.1.0),
+    methods,
+    Matrix,
+    testthat
+LinkingTo: Rcpp
+LazyData: true
+License: GPL-3
+VignetteBuilder: knitr
+Suggests:
+    knitr,
+    sp,
+    fields,
+    ggplot2,
+    rworldxtra,
+    tidyr
+SystemRequirements: C++11
+Collate:
+    'gurobi.R'
+    'rgurobi.R'
+    'data.R'
+    'dependencies.R'
+    'RcppExports.R'
+    'zzz.R'
+RoxygenNote: 5.0.1
