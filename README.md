@@ -1,6 +1,8 @@
 rgurobi (under development)
 ============
 
+[![DOI](https://zenodo.org/badge/18940/paleo13/rgurobi.svg)](https://zenodo.org/badge/latestdoi/18940/paleo13/rgurobi)
+
 ### Solve optimisation problems using the commercial [Gurobi software package](http://www.gurobi.com/). This package provides similar functionality to the [official gurobi R package](http://www.gurobi.com/products/modeling-languages/r). However, this package allows users to retrieve multiple solutions from the solution pool after solving a problem. Note that this package does not support quadratic expressions.
 
 To install this package, the Gurobi software package first must be installed (see here for instructions: [Linux](www.gurobi.com/documentation/6.5/quickstart_linux.pdf), [Windows](www.gurobi.com/documentation/6.5/quickstart_windows.pdf), [Mac OSX](www.gurobi.com/documentation/6.5/quickstart_mac.pdf)). 
@@ -26,4 +28,4 @@ vignette('rgurobi', package='rgurobi')
 
 **If this R package helped you, please cite it.**
 
-Hanson J.O. (2016). rgurobi: Solve optimisation problems using Gurobi. Version 1.0.0. doi: .
+Hanson J.O. (2016). rgurobi: Solve optimisation problems using Gurobi. Version 1.0.0. doi: 10.5281/zenodo.35188.
