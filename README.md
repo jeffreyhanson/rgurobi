@@ -1,7 +1,7 @@
 rgurobi (under development)
 ============
 
-### Solve optimisation problems using the commerical [Gurobi software package](http://www.gurobi.com/). This package provides similar functionality to the [official gurobi R package](http://www.gurobi.com/products/modeling-languages/r). However, this package allows users to retrive multiple solutions from the solution pool after solving a problem. Note that this package does not support quadratic expressions.
+### Solve optimisation problems using the commercial [Gurobi software package](http://www.gurobi.com/). This package provides similar functionality to the [official gurobi R package](http://www.gurobi.com/products/modeling-languages/r). However, this package allows users to retrieve multiple solutions from the solution pool after solving a problem. Note that this package does not support quadratic expressions.
 
 To install this package, the Gurobi software package first must be installed (see here for instructions: [Linux](www.gurobi.com/documentation/6.5/quickstart_linux.pdf), [Windows](www.gurobi.com/documentation/6.5/quickstart_windows.pdf), [Mac OSX](www.gurobi.com/documentation/6.5/quickstart_mac.pdf)). 
 

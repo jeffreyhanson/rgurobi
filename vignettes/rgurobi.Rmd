@@ -73,7 +73,7 @@ Specficially, the problem is formulated as an integer problem (IP):
 & & & X_i \in {0,1} & \forall & 0 \leq i \leq I-1 \tag{1d}\\ 
 \end{align*}
 
-The objective function is the combined cost of building facilities in selected locations and the transportation costs from these facilities to the stores (1a). Constraints (1b) ensure that each store recevies products from a facility. Constraints (1c) ensure that stores are only assigned to receive products from locations where facilities are to be built. Contraints (1d) ensure that the decison variables are binary.
+The objective function is the combined cost of building facilities in selected locations and the transportation costs from these facilities to the stores (1a). Constraints (1b) ensure that each store receives products from a facility. Constraints (1c) ensure that stores are only assigned to receive products from locations where facilities are to be built. Constraints (1d) ensure that the decision variables are binary.
 
 #### Data and dependencies
 We will use data collected by Daskin [-@r1]. This dataset is stored in the `city1990` object and contains data for 88 cities obtained from the 1990 Population and Housing Census. Each row corresponds to a different city. The cities present in the dataset are the 50 most populous cities in the lower 48 states in addition to the state capitals. The 'first.demand' column contains the 1990 population of each city. The 'second.demand' column contains the number of households in the city in 1990. The 'fixed.cost' is the 1990 median home values in the city. 
