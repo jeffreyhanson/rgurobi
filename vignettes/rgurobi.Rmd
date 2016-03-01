@@ -33,15 +33,6 @@ knitr::opts_chunk$set(cache=TRUE)
 set.seed(500)
 ```
 
-<!-- add table of contents -->
-\setcounter{tocdepth}{5}
-\hypersetup{linkcolor=black}
-\tableofcontents
-\newpage
-
-## Introduction
-
-
 ## Case-study
 Here, we will use a case-study to illustrate the use of the \texttt{rgurobi R} package. Specifically, we will tackle the uncapacitated facility location problem [@r2]. This problem involves a product. This product is made at facilities. Products are transported to stores and sold to consumers. Each store has a different level of demand. The cost of transporting the product from a facility to a store is associated with a cost. Building a facility in a location to minimise transportation costs is also associated with a cost. The goal of this problem is to find out where facilities should be built to minimise the combined building and transportation costs.
 

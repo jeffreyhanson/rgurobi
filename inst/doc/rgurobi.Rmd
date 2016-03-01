@@ -33,15 +33,6 @@ knitr::opts_chunk$set(cache=TRUE)
 set.seed(500)
 ```
 
-<!-- add table of contents -->
-\setcounter{tocdepth}{5}
-\hypersetup{linkcolor=black}
-\tableofcontents
-\newpage
-
-## Introduction
-
-
 ## Case-study
 Here, we will use a case-study to illustrate the use of the \texttt{rgurobi R} package. Specifically, we will tackle the uncapacitated facility location problem [@r2]. This problem involves a product. This product is made at facilities. Products are transported to stores and sold to consumers. Each store has a different level of demand. The cost of transporting the product from a facility to a store is associated with a cost. Building a facility in a location to minimise transportation costs is also associated with a cost. The goal of this problem is to find out where facilities should be built to minimise the combined building and transportation costs.
 
@@ -73,7 +64,7 @@ Specficially, the problem is formulated as an integer problem (IP):
 & & & X_i \in {0,1} & \forall & 0 \leq i \leq I-1 \tag{1d}\\ 
 \end{align*}
 
-The objective function is the combined cost of building facilities in selected locations and the transportation costs from these facilities to the stores (1a). Constraints (1b) ensure that each store recevies products from a facility. Constraints (1c) ensure that stores are only assigned to receive products from locations where facilities are to be built. Contraints (1d) ensure that the decison variables are binary.
+The objective function is the combined cost of building facilities in selected locations and the transportation costs from these facilities to the stores (1a). Constraints (1b) ensure that each store receives products from a facility. Constraints (1c) ensure that stores are only assigned to receive products from locations where facilities are to be built. Constraints (1d) ensure that the decision variables are binary.
 
 #### Data and dependencies
 We will use data collected by Daskin [-@r1]. This dataset is stored in the `city1990` object and contains data for 88 cities obtained from the 1990 Population and Housing Census. Each row corresponds to a different city. The cities present in the dataset are the 50 most populous cities in the lower 48 states in addition to the state capitals. The 'first.demand' column contains the 1990 population of each city. The 'second.demand' column contains the number of households in the city in 1990. The 'fixed.cost' is the 1990 median home values in the city. 

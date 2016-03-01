@@ -1,4 +1,4 @@
-rgurobi (under development)
+rgurobi
 ============
 
 [![DOI](https://zenodo.org/badge/18940/paleo13/rgurobi.svg)](https://zenodo.org/badge/latestdoi/18940/paleo13/rgurobi)
