@@ -44,7 +44,7 @@ The Gurobi Optimizer is a commercial library for solving linear, quadratic, and 
 The gurobi function takes a pair of list variables, each consisting of multiple named components.
 The first argument, model, contains the optimization model to be solved. Many of model's named components are optional. The following is an enumeration of all the named components of the model argument.
 
-model$A	The linear constraint matrix. This can be dense or sparse. Sparse matrices should be built using either sparseMatrix from the Matrix package, or simple_triplet_matrix from the slam package.
+model$A	The linear constraint matrix. This can be dense or sparse. Sparse matrices should be built using either \code{sparseMatrix} from the Matrix package, or \code{simple_triplet_matrix} from the slam package.
 model$obj	The linear objective vector (the c vector in the problem statement above). You must specify one value for each column of A.
 model$sense	The senses of the linear constraints. Allowed values are '=', '<=', or '>='. You must specify one value for each row of A.
 model$rhs	The right-hand side vector for the linear constraints (the b vector in the problem statement above). You must specify one value for each row of A.
