@@ -3,8 +3,8 @@ context('rgurobi')
 test_that('gurobi (linear problem)', {
 	# init
 	model <- list()
-	model$A <- matrix(c(1, 2, 3, 1, 1, 0), nrow = 2, ncol=3, byrow=T)
-	model$obj <- c(1, 1, 2)
+	model$A <- matrix(c(1, 2, 3, 0, 1, 1, 0, 0), nrow = 2, ncol=4, byrow=T)
+	model$obj <- c(1, 1, 2, 0.1)
 	model$sense <- c("<=", ">=")
 	model$rhs <- c(4, 1)
 	model$vtype  <- "B"

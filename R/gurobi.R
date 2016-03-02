@@ -102,13 +102,6 @@ gurobi <- function (model, params = NULL, NumberSolutions=1, verbose=FALSE) {
 			giveCsparse=FALSE
 		)
 	}
-	# check that all rows have at least one constraint
-	invalid.rows <- which(!seq_len(nrow(model$A)) %in% (unique(model$A@i)+1))
-	if (length(invalid.rows)>1)
-		stop(paste('model$A has rows with no finite values:', paste(invalid.rows, collapse=',')))
-	invalid.cols <- which(!seq_len(ncol(model$A)) %in% (unique(model$A@j)+1))
-	if (length(invalid.cols)>1)
-		stop(paste('model$A has columns with no finite values:', paste(invalid.cols, collapse=',')))
 		
 	# extract indices
 	model$A_rows <- model$A@i
@@ -120,9 +113,6 @@ gurobi <- function (model, params = NULL, NumberSolutions=1, verbose=FALSE) {
 	model$sense <- gsub('>=', '>', model$sense, fixed=TRUE)
 	model$sense <- gsub('<=', '<', model$sense, fixed=TRUE)
 	## run gurobi
-	
-	o1 <<- model
-	
 	out <- solve_gurobi(
 		model=model,
 		param_names=names(params),
