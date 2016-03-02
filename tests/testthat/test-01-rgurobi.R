@@ -107,3 +107,16 @@ test_that('gurobi (integer problem)', {
 	if (file.exists('gurobi.log')) unlink('gurobi.log')
 })
 
+test_that('rapr problem', {
+	# load model
+	load('model.rda')
+
+	# solve model
+	result1 <- rgurobi::gurobi(model, params=list(Presolve=2))
+	result2 <- gurobi::gurobi(model, params=list(Presolve=2))
+	
+	# tests
+	expect_equal(result1$objval[1], result2$objval)
+	expect_equal(result1$x[1,], result2$x)
+
+})

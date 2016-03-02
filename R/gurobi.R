@@ -67,7 +67,7 @@ gurobi <- function (model, params = NULL, NumberSolutions=1, verbose=FALSE) {
 	expect_true('rhs' %in% names(model))
 	expect_true('vtype' %in% names(model))
 	expect_equal(length(model$obj), ncol(model$A))
-	expect_true(all(!is.na(model$obj)))
+	expect_true(all(is.finite(model$obj)))
 	if (length(model$vtype)==1) model$vtype=rep(model$vtype[1], ncol(model$A))
 	expect_equal(length(model$vtype), ncol(model$A))
 	expect_true(all(!is.na(model$vtype)))
@@ -76,7 +76,6 @@ gurobi <- function (model, params = NULL, NumberSolutions=1, verbose=FALSE) {
 	expect_true(all(!is.na(model$sense)))
 	if (is.null(model$sense)) model$sense='min'
 	expect_equal(length(model$sense),nrow(model$A))
-	expect_true(all(!is.na(model$sense)))
 	expect_true(NumberSolutions>0)
 	if (is.null(model$modelsense)) model$modelsense<-'min'
 	expect_true(model$modelsense %in% c('min', 'max'))
@@ -86,28 +85,31 @@ gurobi <- function (model, params = NULL, NumberSolutions=1, verbose=FALSE) {
 	if (is.null(model$lb)) model$lb<-numeric(0)
 	if (is.null(model$ub)) model$ub<-numeric(0)
 	if (is.null(params)) params <- list()
-	expect_true(all(!is.na(model$lb)))
-	expect_true(all(!is.na(model$ub)))
+	expect_true(all(is.finite(model$lb)))
+	expect_true(all(is.finite(model$ub)))
 	## prepare model inputs
 	# convert model$A to sparse matrix
 	if (!inherits(model$A, 'dgTMatrix'))
 		model$A <- as(model$A, 'dgTMatrix')
-	# replace values in model$A with NA if abs(value) < 1e-13
+	# replace values in model$A with NA if abs(value) < 1e-13	
 	low.values <- which(abs(model$A@x) < 1e-13)
 	if (length(low.values)>0) {
 		warning('Warning for adding variables: zero or small (< 1e-13) coefficients, ignored')
 		model$A <- sparseMatrix(
-			i=model$A@i[-low.values],
-			j=model$A@j[-low.values],
-			x=model$A@x[-low.values]
+			i=model$A@i[-low.values]+1,
+			j=model$A@j[-low.values]+1,
+			x=model$A@x[-low.values],
+			giveCsparse=FALSE
 		)
 	}
 	# check that all rows have at least one constraint
-	o1 <<- model
-	
 	invalid.rows <- which(!seq_len(nrow(model$A)) %in% (unique(model$A@i)+1))
 	if (length(invalid.rows)>1)
 		stop(paste('model$A has rows with no finite values:', paste(invalid.rows, collapse=',')))
+	invalid.cols <- which(!seq_len(ncol(model$A)) %in% (unique(model$A@j)+1))
+	if (length(invalid.cols)>1)
+		stop(paste('model$A has columns with no finite values:', paste(invalid.cols, collapse=',')))
+		
 	# extract indices
 	model$A_rows <- model$A@i
 	model$A_cols <- model$A@j
@@ -118,6 +120,9 @@ gurobi <- function (model, params = NULL, NumberSolutions=1, verbose=FALSE) {
 	model$sense <- gsub('>=', '>', model$sense, fixed=TRUE)
 	model$sense <- gsub('<=', '<', model$sense, fixed=TRUE)
 	## run gurobi
+	
+	o1 <<- model
+	
 	out <- solve_gurobi(
 		model=model,
 		param_names=names(params),

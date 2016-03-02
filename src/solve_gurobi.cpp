@@ -22,7 +22,7 @@ Rcpp::List solve_gurobi(Rcpp::List model, std::vector<std::string> param_names, 
 	if (verbose) Rcout << "\tloading data" << std::endl;
 	std::vector<int> A_rows=model["A_rows"];
 	std::vector<int> A_cols=model["A_cols"];
-	std::vector<int> A_vals=model["A_vals"];
+	std::vector<double> A_vals=model["A_vals"];
 	std::vector<double> obj=model["obj"];
 	std::vector<double> rhs=model["rhs"];
 	std::vector<double> ub=model["ub"];
@@ -83,8 +83,11 @@ Rcpp::List solve_gurobi(Rcpp::List model, std::vector<std::string> param_names, 
 	// add constraints
 	if (verbose) Rcout << "\tadding constrs" << std::endl;
 	GRBLinExpr *lhs_grb = new GRBLinExpr[nrow];
-	for (std::size_t i=0; i<A_rows.size(); ++i)
+	for (std::size_t i=0; i<nrow; ++i)
+		lhs_grb[i]=0;
+	for (std::size_t i=0; i<A_rows.size(); ++i) {
 		lhs_grb[A_rows[i]]+=A_vals[i]*vars_grb[A_cols[i]];
+	}
 	model_grb.addConstrs(lhs_grb, &sense_char[0], &rhs[0], &names[0], nrow);
 	model_grb.update();
 	
