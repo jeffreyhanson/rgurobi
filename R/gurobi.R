@@ -92,6 +92,23 @@ gurobi <- function (model, params = NULL, NumberSolutions=1, verbose=FALSE) {
 	# convert model$A to sparse matrix
 	if (!inherits(model$A, 'dgTMatrix'))
 		model$A <- as(model$A, 'dgTMatrix')
+	# replace values in model$A with NA if abs(value) < 1e-13
+	low.values <- which(abs(model$A@x) < 1e-13)
+	if (length(low.values)>0) {
+		warning('Warning for adding variables: zero or small (< 1e-13) coefficients, ignored')
+		model$A <- sparseMatrix(
+			i=model$A@i[-low.values],
+			j=model$A@j[-low.values],
+			x=model$A@x[-low.values]
+		)
+	}
+	# check that all rows have at least one constraint
+	o1 <<- model
+	
+	invalid.rows <- which(!seq_len(nrow(model$A)) %in% (unique(model$A@i)+1))
+	if (length(invalid.rows)>1)
+		stop(paste('model$A has rows with no finite values:', paste(invalid.rows, collapse=',')))
+	# extract indices
 	model$A_rows <- model$A@i
 	model$A_cols <- model$A@j
 	model$A_vals <- model$A@x

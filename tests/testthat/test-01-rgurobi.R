@@ -17,6 +17,7 @@ test_that('gurobi (linear problem)', {
 	expect_equal(length(result1$objval), 1)
 	expect_equal(result1$objval, result2$objval)
 	expect_equal(result1$x[1,], result2$x)
+	if (file.exists('gurobi.log')) unlink('gurobi.log')
 })
 
 test_that('gurobi (integer problem)', {
@@ -103,5 +104,6 @@ test_that('gurobi (integer problem)', {
 	## tests
 	expect_equal(result1$objval[1], result2$objval)
 	expect_equal(result1$x[1,], result2$x)
+	if (file.exists('gurobi.log')) unlink('gurobi.log')
 })
 
