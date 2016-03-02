@@ -9,11 +9,14 @@ test_that('gurobi (linear problem)', {
 	model$rhs <- c(4, 1)
 	model$vtype  <- "B"
 	params <- list(Presolve=2, TimeLimit=100.0)
-	result <- gurobi(model, params)
+	result1 <- rgurobi::gurobi(model, params)
+	result2 <- gurobi::gurobi(model, params)
 	# tests
-	expect_equal(result$status, "OPTIMAL")
-	expect_equal(nrow(result$x), 1)
-	expect_equal(length(result$objval), 1)
+	expect_equal(result1$status, "OPTIMAL")
+	expect_equal(nrow(result1$x), 1)
+	expect_equal(length(result1$objval), 1)
+	expect_equal(result1$objval, result2$objval)
+	expect_equal(result1$x[1,], result2$x)
 })
 
 test_that('gurobi (integer problem)', {
@@ -94,7 +97,11 @@ test_that('gurobi (integer problem)', {
 	model$lb <- rep(0, length(var.dict))
 
 	# solve model
-	result <- gurobi(model, params=list(Presolve=0), NumberSolutions=2)
-
+	result1 <- rgurobi::gurobi(model, params=list(Presolve=2), NumberSolutions=2)
+	result2 <- gurobi::gurobi(model, params=list(Presolve=2))
+	
+	## tests
+	expect_equal(result1$objval[1], result2$objval)
+	expect_equal(result1$x[1,], result2$x)
 })
 

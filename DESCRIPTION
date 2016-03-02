@@ -23,7 +23,8 @@ Suggests:
     fields,
     ggplot2,
     rworldxtra,
-    tidyr
+    tidyr,
+    gurobi
 SystemRequirements: C++11
 Collate:
     'gurobi.R'
